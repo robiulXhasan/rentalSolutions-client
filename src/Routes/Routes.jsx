@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import AllProperties from "../Pages/AllProperties/AllProperties/AllProperties";
+import AddProperty from "../Pages/AddProperty/AddProperty";
 
 const router= createBrowserRouter([
 
@@ -16,6 +17,10 @@ const router= createBrowserRouter([
             {       
                 path: "/allproperties",
                 element: <AllProperties/>
+            },
+            {       
+                path: "/addproperty",
+                element: <AddProperty/>
             },
         ]
     }

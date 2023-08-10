@@ -13,7 +13,7 @@ const NavBar = () => {
         <Link to={'/allproperties'}>All Properties</Link>
       </li>
       <li>
-        <Link>Add Property</Link>
+        <Link to={'/addproperty'}>Add Property</Link>
       </li>
       <li>
         <Link>About Us</Link>
