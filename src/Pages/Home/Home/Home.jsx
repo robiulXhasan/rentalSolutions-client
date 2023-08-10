@@ -15,8 +15,8 @@ const Home = () => {
 
   return (
     <div>
-      <Banner />
-      <Hero />
+      <Banner className="" />
+      <Hero className="" />
       <section className="pt-5 md:pt-0 pb-10 bg-violet-100">
         <div className="w-11/12 md:w-10/12 mx-auto">
           <div className="category-title pt-32 md:pt-20 ">

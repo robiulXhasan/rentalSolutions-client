@@ -19,9 +19,89 @@ const TopListingProperty = () => {
   return (
     <div className="w-11/12 md:w-10/12 mx-auto mt-5">
       <div className="text-center top-listing-title my-5">
-        <p>Top Listing Property</p>
+        <h1 className="text-4xl font-bold">Top Listing Property</h1>
       </div>
       <Swiper
+        slidesPerView={3}
+        spaceBetween={15}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+          1300: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        }}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {property.map((pro,index) => (
+          <SwiperSlide key={index}>
+            <div className="card card-compact bg-white mb-14 shadow-xl border border-violet-400">
+              <figure>
+                <img src={pro.image} className=" object-cover object-center h-44" alt="..." />
+              </figure>
+              <div className="card-body">
+                <p className="fw-bold">{pro.title}</p>
+
+                <span className="flex items-center justify-start gap-2">
+                  <ImLocation2 className="" />
+                  {pro.area}, {pro.city}
+                </span>
+                <p className="text-start"> Property Type: {pro.category}</p>
+                <div className="flex justify-between gap-4">
+                  <span className="flex items-center gap-2">
+                    <FaBed className="text-violet-400" /> {pro.room}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <FaBath className="text-violet-400" /> {pro.bath}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <FaSquare className="text-violet-400" /> {pro.propertySize}{" "}
+                    sqft.
+                  </span>
+                </div>
+                <div className=" text-start">
+                  <span className="">
+                    Available From:{" "}
+                    <b className="text-violet-400">{pro.month}</b>
+                  </span>
+                </div>
+                <div className=" text-start">
+                  <span>
+                    Rent: <span className="text-violet-400">{pro.rent}</span> TK
+                    / month
+                  </span>
+                </div>
+                <div className="text-center ">
+                  <Link
+                    to={`/details/${pro._id}`}
+                    className=" btn w-full border-0 border-violet-400 border-b-4"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* <Swiper
         slidesPerView={3}
         spaceBetween={30}
         slidesPerGroup={1}
@@ -113,9 +193,12 @@ const TopListingProperty = () => {
           </div>
         </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
       <div className="text-center mt-2 mb-4">
-        <Link to="/allProperty" className="btn border-0 border-violet-400 border-b-4 px-10">
+        <Link
+          to="/allproperties"
+          className="btn border-0 border-violet-400 border-b-4 px-10"
+        >
           View All Property
         </Link>
       </div>
@@ -246,8 +329,7 @@ export default TopListingProperty;
 //   </Link>
 // </div>
 // </div>
-              
-                
+
 //             </div>
 //           </SwiperSlide>
 //         ))}

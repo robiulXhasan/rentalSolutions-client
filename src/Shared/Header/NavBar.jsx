@@ -7,10 +7,10 @@ const NavBar = () => {
   const navItems = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to={'/'}>Home</Link>
       </li>
       <li>
-        <Link>All Properties</Link>
+        <Link to={'/allproperties'}>All Properties</Link>
       </li>
       <li>
         <Link>Add Property</Link>
