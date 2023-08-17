@@ -62,7 +62,7 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link>Login </Link>
+        <Link to={'/login'}>Login </Link>
       <div className="dropdown dropdown-left ms-2">
   <label tabIndex={0} className=""><BiDownArrow/> </label>
   <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

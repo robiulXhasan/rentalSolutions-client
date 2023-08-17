@@ -22,7 +22,7 @@ const AddProperty = () => {
     // fetch(url, {
     //   method: "POST",
     //   body: formData,
-    // })
+    // }) 
     //   .then((res) => res.json())
     //   .then((imgData) => {
     //     console.log("imagedata :", imgData);
@@ -39,7 +39,7 @@ const AddProperty = () => {
     //         city: data.city,
     //         details: data.details,
     //         elevator: data.elevator,
-    //         email: user.email,
+    //         email: user?.email,
     //         garage: parseInt(data.garage),
     //         gas: data.gas,
     //         kitchen: parseInt(data.kitchen),
