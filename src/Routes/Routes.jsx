@@ -5,35 +5,39 @@ import AllProperties from "../Pages/AllProperties/AllProperties/AllProperties";
 import AddProperty from "../Pages/AddProperty/AddProperty";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import PrivateRoutes from "./PrivateRoutes";
 
-const router= createBrowserRouter([
-
-    {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
         path: "/",
-        element:<Main/>,
-        children: [
-            {       
-                path: "/",
-                element: <Home/>
-            },
-            {       
-                path: "/allproperties",
-                element: <AllProperties/>
-            },
-            {       
-                path: "/addproperty",
-                element: <AddProperty/>
-            },
-            {       
-                path: "/login",
-                element: <Login/>
-            },
-            {       
-                path: "/register",
-                element: <Register/>
-            },
-        ]
-    }
-])
+        element: <Home />,
+      },
+      {
+        path: "/allproperties",
+        element: <AllProperties />,
+      },
+      {
+        path: "/addproperty",
+        element: (
+          <PrivateRoutes>
+            <AddProperty />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
+  },
+]);
 
 export default router;

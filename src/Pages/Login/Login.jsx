@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { userLogin } = useAuth();
+  const { userLogin,logOut } = useAuth();
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState("");
   const navigate=useNavigate()
@@ -22,7 +22,15 @@ const Login = () => {
     userLogin(data.email, data.password)
       .then((res) => {
         console.log("successfully");
-        navigate('/')
+        // if(!res.user.emailVerified){
+        //   logOut()
+        //   console.log("please verified your email address");
+        // }
+        // else{
+        //   navigate("/")
+          
+        // }
+        navigate("/")
 
       })
       .catch((err) => console.log(err.message));

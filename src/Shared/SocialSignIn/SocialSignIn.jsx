@@ -1,19 +1,32 @@
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
+import React from "react";
+import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const SocialSignIn = () => {
-    return (
-        <div>
-        <div className="divider">Or</div>
-        <div
-         
-          className="flex justify-center items-center gap-2 btn btn-outline"
-        >
-          <FcGoogle />
-          Login with Google
-        </div>
-      </div>
-    );
+  const { googleLogin } = useAuth();
+  const navigate=useNavigate()
+  const handleGoogleSignIn = () => {
+    googleLogin()
+      .then((res) => {
+        if(res.user.emailVerified){
+          navigate("/")
+        }
+        else{
+          console.log("please verified your email address");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  return (
+    <div>
+      <div className="divider">Or</div>
+      <button onClick={handleGoogleSignIn} className="w-full btn btn-outline">
+        <FcGoogle />
+        Login with Google
+      </button>
+    </div>
+  );
 };
 
 export default SocialSignIn;

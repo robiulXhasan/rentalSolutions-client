@@ -12,7 +12,7 @@ const AllProperties = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://rent-us-bd.vercel.app/productCollection")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
     .then((data) => {setLoading(false);
       setPosts(data)});
@@ -42,24 +42,24 @@ const AllProperties = () => {
 
   return (
     <div>
-      <div className="mb-32 md:mb-0">
+      <div className="mb-32 md:mb-0 ">
         <div className="bg-green-950 h-[240px]"></div>
         <SearchArea />
       </div>
-      <div className="w-11/12 md:w-10/12 mx-auto">
-        <h3 className="mt-10 font-bold text-3xl text-violet-500  my-5">
+      <div className="w-11/12 md:w-10/12 mx-auto mt-10">
+        {/* <h3 className="mt-10 font-bold text-3xl text-violet-500  my-5">
           Search results:-
-        </h3>
-        <div className="grid grid-cols-4">
+        </h3> */}
+        <div className="md:grid grid-cols-4">
           <div className="col-span-1">
             <SortingArea />
           </div>
-          <div className="col-span-3 ms-10">
+          <div className="col-span-3 md:ms-10">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-bold text-3xl text-violet-500">
                 Property For Rent
               </h3>
-              <span>{posts.length} results.</span>
+              <p><span className="text-violet-500 font-bold">{posts.length}</span> results.</p>
             </div>
             <div>
               <Posts posts={currentItems} loading={loading}></Posts>

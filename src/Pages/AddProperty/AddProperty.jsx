@@ -1,8 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOST_KEY;
+
 
 const AddProperty = () => {
-  const user = [{ "user.email": "robi" }];
+  const {user} = useAuth()
   const {
     register,
     handleSubmit,
@@ -12,64 +15,62 @@ const AddProperty = () => {
 
   const handleAddProduct = (data) => {
     console.log(data);
-    // const image = data.image[0];
-    // console.log(image);
-    // const formData = new FormData();
-    // console.log(formData);
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
 
-    // formData.append("image", image);
-    // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-    // fetch(url, {
-    //   method: "POST",
-    //   body: formData,
-    // }) 
-    //   .then((res) => res.json())
-    //   .then((imgData) => {
-    //     console.log("imagedata :", imgData);
-    //     if (imgData.success) {
-    //       console.log(imgData.data.url);
-    //       const product = {
-    //         name: data.name,
-    //         address: data.address,
-    //         rent: parseInt(data.rent),
-    //         month: data.month,
-    //         area: data.area,
-    //         bath: parseInt(data.bath),
-    //         category: data.category,
-    //         city: data.city,
-    //         details: data.details,
-    //         elevator: data.elevator,
-    //         email: user?.email,
-    //         garage: parseInt(data.garage),
-    //         gas: data.gas,
-    //         kitchen: parseInt(data.kitchen),
-    //         phone: data.phone,
-    //         propertySize: parseInt(data.propertySize),
-    //         room: parseInt(data.room),
-    //         title: data.title,
-    //         image: imgData.data.url,
-    //       };
 
-    //   // Save Products information to the database
-    //   fetch(
-    //     "https://rent-us-bd.vercel.app/productCollection",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "content-type": "application/json",
-    //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
-    //       },
-    //       body: JSON.stringify(product),
-    //     }
-    //   )
-    //     .then((res) => res.json())
-    //     .then((result) => {
-    //       console.log(result);
-    //       // toast.success(`${data.name} is added successfully`);
-    //       navigate("/allProperty");
-    //     });
-    //     }
-    //})
+    const image_hoisting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+    fetch(image_hoisting_url, {
+      method: "POST",
+      body: formData,
+    }) 
+      .then((res) => res.json())
+      .then((imgData) => {
+        console.log("imagedata :", imgData);
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const product = {
+            name: data.name,
+            address: data.address,
+            rent: parseInt(data.rent),
+            month: data.month,
+            area: data.area,
+            bath: parseInt(data.bath),
+            category: data.category,
+            city: data.city,
+            details: data.details,
+            elevator: data.elevator,
+            email: user?.email,
+            garage: parseInt(data.garage),
+            gas: data.gas,
+            kitchen: parseInt(data.kitchen),
+            phone: data.phone,
+            propertySize: parseInt(data.propertySize),
+            room: parseInt(data.room),
+            title: data.title,
+            image: imgData.data.url,
+          };
+
+      // Save Products information to the database
+      fetch(
+        "http://localhost:5000/product",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            // authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(product),
+        }
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          // toast.success(`${data.name} is added successfully`);
+         // navigate("/allProperty");
+        });
+        }
+    })
   };
   return (
     <div className="w-11/12 md:w-3/4 mx-auto border p-10 shadow">
@@ -106,7 +107,7 @@ const AddProperty = () => {
                 })}
                 type="number"
               />
-              {errors.name && (
+              {errors.phone && (
                 <p className="text-danger">{errors.phone.message}</p>
               )}
             </div>
@@ -137,7 +138,7 @@ const AddProperty = () => {
               type="text"
               placeholder="Enter property title"
             />
-            {errors.name && (
+            {errors.title && (
               <p className="text-danger">{errors.title.message}</p>
             )}
           </div>
@@ -153,7 +154,7 @@ const AddProperty = () => {
               rows={3}
               placeholder="write details of a property"
             />
-            {errors.name && (
+            {errors.details && (
               <p className="text-danger">{errors.details.message}</p>
             )}
           </div>
@@ -169,7 +170,7 @@ const AddProperty = () => {
                 type="number"
                 placeholder="rent amount"
               />
-              {errors.name && (
+              {errors.rent && (
                 <p className="text-danger">{errors.rent.message}</p>
               )}
             </div>
@@ -196,7 +197,7 @@ const AddProperty = () => {
                 <option value="November">November</option>
                 <option value="December">December</option>
               </select>
-              {errors.name && (
+              {errors.month && (
                 <p className="text-danger">{errors.month.message}</p>
               )}
             </div>
@@ -213,7 +214,7 @@ const AddProperty = () => {
                 type="number"
                 placeholder="size of a property in sqft."
               />
-              {errors.name && (
+              {errors.propertySize && (
                 <p className="text-danger">{errors.propertySize.message}</p>
               )}
             </div>
@@ -237,7 +238,7 @@ const AddProperty = () => {
                 <option value="Sylhet">Sylhet</option>
                 <option value="Mymensingh">Mymensingh</option>
               </select>
-              {errors.name && (
+              {errors.city && (
                 <p className="text-danger">{errors.city.message}</p>
               )}
             </div>
@@ -261,7 +262,7 @@ const AddProperty = () => {
                 <option value="Khilkhet">Khilkhet</option>
                 <option value="Farmgate">Farmgate</option>
               </select>
-              {errors.name && (
+              {errors.area && (
                 <p className="text-danger">{errors.area.message}</p>
               )}
             </div>
@@ -290,7 +291,7 @@ const AddProperty = () => {
                   Shop & Restaurant Space
                 </option>
               </select>
-              {errors.name && (
+              {errors.category && (
                 <p className="text-danger">{errors.category.message}</p>
               )}
             </div>
@@ -307,7 +308,7 @@ const AddProperty = () => {
                 rows={3}
                 placeholder="Location / address of your property"
               />
-              {errors.name && (
+              {errors.address && (
                 <p className="text-danger">{errors.address.message}</p>
               )}
             </div>

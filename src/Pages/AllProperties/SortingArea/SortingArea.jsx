@@ -2,7 +2,7 @@ import React from "react";
 
 const SortingArea = () => {
   return (
-    <div className="bg-white p-2 rounded-lg shadow-xl">
+    <div className="bg-white p-2 rounded-lg shadow-xl mb-10 md:mb-0">
       <div className="sorting-section p-3">
         <h5>Sort by</h5>
         <form>

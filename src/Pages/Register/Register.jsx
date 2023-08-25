@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-  const { user, createUser, profileUpdate, verifyUser } = useAuth();
+  const { user, createUser, profileUpdate, verifyUser, logOut } = useAuth();
   const [visible, setVisible] = useState(false);
   const [visibleC, setVisibleC] = useState(false);
   const [error, setError] = useState("");
@@ -20,27 +20,42 @@ const Register = () => {
     reset,
   } = useForm();
   const handleLogin = (data) => {
+    const savedUser = { name: data.name, email: data.email };
+    console.log(savedUser);
     createUser(data.email, data.password)
       .then((result) => {
-        const loggedUser = result.user;
-        verifyUser(loggedUser)
-          .then((res) => {
-            console.log("email verifivation sent");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        profileUpdate(data?.name)
-          .then((result) => {
-          })
-          .catch((err) => {});
+        
+        // const loggedUser = result.user;
+
+        // verifyUser(loggedUser)
+        //   .then((res) => {
+            
+        //     console.log("email verifivation sent");
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+        profileUpdate(data.name)
+              .then((result) => {
+                console.log(savedUser);
+                fetch("http://localhost:5000/user", {
+                  method: "POST",
+                  headers: { "content-type": "application/json" },
+                  body: JSON.stringify(savedUser),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                  });
+                //saveUser(data.name, data.email);
+              })
+              .catch((err) => {});
       })
       .catch((err) => {
         console.log(err);
       });
-
-    console.log(data);
   };
+  //const saveUser = (name, email) => {};
   const handleShowPassword = () => {
     setVisible(!visible);
   };

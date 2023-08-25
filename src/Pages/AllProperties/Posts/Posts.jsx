@@ -10,7 +10,7 @@ const Posts = ({ posts, loading }) => {
     return <h2>Loading...</h2>;
   }
   return (
-    <div className="grid grid-cols-3 gap-5 mb-10">
+    <div className="grid md:grid-cols-3 gap-5 mb-10">
       {posts.map((post) => (
         <div
           key={post._id}
@@ -39,7 +39,7 @@ const Posts = ({ posts, loading }) => {
                 <FaBath className="text-violet-400" /> {post.bath}
               </span>
               <span className="flex items-center gap-2">
-                <FaSquare className="text-violet-400" /> {post.postspertySize}{" "}
+                <FaSquare className="text-violet-400" /> {post.propertySize}{" "}
                 sqft.
               </span>
             </div>

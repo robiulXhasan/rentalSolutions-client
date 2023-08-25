@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BiDownArrow } from 'react-icons/bi';
-
+import { BiDownArrow } from "react-icons/bi";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
+  const { user, logOut } = useAuth();
   const navItems = (
     <>
       <li>
-        <Link to={'/'}>Home</Link>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <Link to={'/allproperties'}>All Properties</Link>
+        <Link to={"/allproperties"}>All Properties</Link>
       </li>
       <li>
-        <Link to={'/addproperty'}>Add Property</Link>
+        <Link to={"/addproperty"}>Add Property</Link>
       </li>
       <li>
         <Link>About Us</Link>
@@ -24,7 +25,6 @@ const NavBar = () => {
       <li>
         <Link>Dashboard</Link>
       </li>
-      
     </>
   );
   return (
@@ -57,19 +57,31 @@ const NavBar = () => {
         <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {navItems}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={'/login'}>Login </Link>
-      <div className="dropdown dropdown-left ms-2">
-  <label tabIndex={0} className=""><BiDownArrow/> </label>
-  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
+        {user ? (
+          <button onClick={logOut} className="btn btn-dark">Log out</button>
+        ) : (
+          <Link to={"/login"}>Login </Link>
+        )}
+
+        <div className="dropdown dropdown-left ms-2">
+          <label tabIndex={0} className="">
+            <BiDownArrow />{" "}
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 2</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
