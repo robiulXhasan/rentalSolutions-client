@@ -1,9 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const SearchArea = () => {
+  const navigate=useNavigate()
+
+  const handleSearch=(event)=>{
+    event.preventDefault();
+    const form=event.target;
+    const city=form?.city?.value;
+    const area=form?.area?.value;
+    const category=form?.rentCategory?.value;
+    navigate('/allproperties',{state: { data: {city, area, category} }})
+
+  }
     return (
         <div className=" hero-property">
-        <form className=" grid md:grid-cols-4 gap-2 md:gap-5 justify-between items-center search-property">
+        <form onSubmit={handleSearch} className=" grid md:grid-cols-4 gap-2 md:gap-5 justify-between items-center search-property">
           <div className="form-control col-span-4 md:col-span-1 md:border-e md:px-3 ">
             <label className="label">
               <span className="label-text text-primary">City</span>
@@ -47,7 +60,7 @@ const SearchArea = () => {
               <span className="label-text  text-primary">Category</span>
             </label>
             <select
-              className="select select-primary w-full " aria-label="Default select example" name="rent" required>
+              className="select select-primary w-full " aria-label="Default select example" name="rentCategory" required>
               <option value="">Choose</option>
               <option value="Commercial Space">Commercial Space</option>
               <option value="Office Space">Office Space</option>
@@ -58,9 +71,7 @@ const SearchArea = () => {
               <option value="Only For Girls">Only For Girls</option>
               <option value="For Family">For Family</option>
               <option value="Community Center">Community Center</option>
-              <option value="Shop & Restaurant Space">
-                Shop & Restaurant Space
-              </option>
+              <option value="Shop & Restaurant Space">Shop & Restaurant Space</option>
             </select>
           </div>
           <div className="pt-9 col-span-4 md:col-span-1  form-control">

@@ -1,26 +1,36 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
-const SortingArea = () => {
+const SortingArea = ({ handleSideBarSearch }) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   return (
     <div className="bg-white p-2 rounded-lg shadow-xl mb-10 md:mb-0">
       <div className="sorting-section p-3">
-        <h5>Sort by</h5>
-        <form>
+        <h5 className="text-2xl mb-2">Sort by</h5>
+        <form onSubmit={handleSubmit(handleSideBarSearch)}>
           <div className="mb-2 form-control">
-            <select  className="select select-primary w-full "
-              aria-label="Default select example" name="price" required>
+            <select
+              className="select select-bordered  w-full text-lg font-normal"
+              aria-label="Default select example"
+              {...register("price")}
+            >
               <option value=""> Sort by price</option>
               <option value="Low to High">Low to High</option>
               <option value="High to Low">High to Low</option>
             </select>
           </div>
           <div className="form-control  ">
-           
             <select
-              className="select select-primary w-full "
+              className="select select-bordered w-full text-lg font-normal "
               aria-label="Default select example"
-              name="city"
               required
+              {...register("city")}
             >
               <option value="">Choose City</option>
               <option value="Dhaka">Dhaka</option>
@@ -33,80 +43,99 @@ const SortingArea = () => {
               <option value="Mymensingh">Mymensingh</option>
             </select>
           </div>
-          <h5 className="mt-2">Types of Rent</h5>
+          <h5 className="my-2 text-xl font-medium ">Types of Rent</h5>
           <div>
-            <div className="form-control space-y-2">
+          {errors.category?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
+
+            <div className="form-control " >
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Apartment Building"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Apartment Building</span>
+                <span className="label-text text-lg">Apartment Building</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Flat Rent"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Flat Rent</span>
+                <span className="label-text text-lg">Flat Rent</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Commercial Space"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Commercial Space</span>
+                <span className="label-text text-lg">Commercial Space</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Office Space"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Office Space</span>
+                <span className="label-text text-lg">Office Space</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Shop & Restaurant"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Shop & Restaurant</span>
+                <span className="label-text text-lg">Shop & Restaurant</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Community Center"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Community Center</span>
+                <span className="label-text text-lg">Community Center</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Hostel Rent"
-                  className="checkbox "
+                  className="checkbox checkbox-sm "
+                  {...register("category", {
+                    required: true,
+                  })}
                 />
-                <span className="label-text ">Hostel Rent</span>
+                <span className="label-text text-lg">Hostel Rent</span>
               </label>
             </div>
-            {/* <Form.Check name="rentType" type="checkbox" label="Flat Rent" value="Flat Rent" />
-          <Form.Check name="rentType" type="checkbox" label="Commercial Space" vale="Commercial Space" />
-          <Form.Check name="rentType" type="checkbox" label="Office Space" value="Office Space" />
-          <Form.Check name="rentType" type="checkbox" label="Shop & Restaurant" value="Shop & Restaurant" />
-          <Form.Check name="rentType" type="checkbox" label="Community Center" value="Community Center" />
-          <Form.Check name="rentType" type="checkbox" label="Hostel Rent" value="Hostel Rent" /> */}
+
           </div>
           <h5 className="mt-2">Select Month</h5>
           <div className="form-control  ">
             <select
-              className="select select-primary w-full "
+              className="select select-primary w-full text-lg font-normal "
               aria-label="Default select example"
               name="month"
               required
+              {...register("month")}
             >
               <option value="">Select Month</option>
               <option value="January">January</option>
@@ -124,116 +153,137 @@ const SortingArea = () => {
             </select>
           </div>
           <h5 className="mt-2">Bed Room</h5>
+          {errors.bed?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
           <div className="grid grid-cols-5 gap-4">
             <div className="form-control">
-            
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="1"
-                    className="checkbox checkbox-sm"
-                  />
-                  <span className="label-text ">1</span>
-                </label>{" "}
-              </div>
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="1"
+                  className="checkbox  checkbox-sm"
+                  
+                  {...register("bed",{required:true})}
+                />
+                <span className="label-text text-lg">1</span>
+              </label>{" "}
+            </div>
 
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="2"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">2</span>
-                </label>{" "}
-              </div>
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="3"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">3</span>
-                </label>{" "}
-              </div>
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="4"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">4</span>
-                </label>{" "}
-              </div>
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="5"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">5</span>
-                </label>{" "}
-              </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="2"
+                  className="checkbox checkbox-sm "
+                  
+                  {...register("bed",{required:true})}
+                />
+                <span className="label-text text-lg">2</span>
+              </label>{" "}
+            </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="3"
+                  className="checkbox checkbox-sm "
+                  
+                  {...register("bed",{required:true})}
+                />
+                <span className="label-text text-lg">3</span>
+              </label>{" "}
+            </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="4"
+                  className="checkbox  checkbox-sm "
+                  
+                  {...register("bed",{required:true})}
+                />
+                <span className="label-text text-lg">4</span>
+              </label>{" "}
+            </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="5"
+                  className="checkbox  checkbox-sm "
+                  
+                  {...register("bed",{required:true})}
+                />
+                <span className="label-text text-lg">5</span>
+              </label>{" "}
+            </div>
           </div>
           <h5 className="mt-2">Wash Room</h5>
+          {errors.washRoom?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
+
           <div className="flex gap-4">
             <div className="form-control">
-            
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="1"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">1</span>
-                </label>{" "}
-              </div>
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="1"
+                  className="checkbox checkbox-sm "
+                  
+                   {...register("washRoom",{required:true})}
+                />
+                <span className="label-text text-lg">1</span>
+              </label>{" "}
+            </div>
 
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="2"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">2</span>
-                </label>{" "}
-              </div>
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="3"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">3</span>
-                </label>{" "}
-              </div>
-              <div className="form-control">
-                {" "}
-                <label className="cursor-pointer flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    value="4"
-                    className="checkbox checkbox-sm "
-                  />
-                  <span className="label-text ">4</span>
-                </label>{" "}
-              </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="2"
+                  className="checkbox  checkbox-sm "
+                  
+                   {...register("washRoom",{required:true})}
+                />
+                <span className="label-text text-lg">2</span>
+              </label>{" "}
+            </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="3"
+                  className="checkbox  checkbox-sm "
+                  
+                   {...register("washRoom",{required:true})}
+                />
+                <span className="label-text text-lg">3</span>
+              </label>{" "}
+            </div>
+            <div className="form-control">
+              {" "}
+              <label className="cursor-pointer flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  value="4"
+                  className="checkbox  checkbox-sm "
+                  
+                   {...register("washRoom",{required:true})}
+                />
+                <span className="label-text text-lg">4</span>
+              </label>{" "}
+            </div>
           </div>
           <div className="my-4 text-center">
-            <input className="btn w-full border-0 border-violet-400 border-b-4 " value={" Find Property"} type="submit"/>
-             
-           
+            <input
+              className="btn w-full border-0 border-violet-400 border-b-4 "
+              value={" Find Property"}
+              type="submit"
+            />
           </div>
         </form>
       </div>
