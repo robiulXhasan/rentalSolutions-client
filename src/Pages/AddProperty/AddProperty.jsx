@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOST_KEY;
 
 
 const AddProperty = () => {
   const {user} = useAuth()
+  const [loading,setLoading]=useState(false)
   const {
     register,
     handleSubmit,
@@ -14,6 +16,7 @@ const AddProperty = () => {
   } = useForm();
 
   const handleAddProduct = (data) => {
+    setLoading(true)
     console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -53,7 +56,7 @@ const AddProperty = () => {
 
       // Save Products information to the database
       fetch(
-        "http://localhost:5000/product",
+        "https://rental-solutions-server.vercel.app/product",
         {
           method: "POST",
           headers: {
@@ -66,12 +69,24 @@ const AddProperty = () => {
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
+         
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+          setLoading(false)
           // toast.success(`${data.name} is added successfully`);
          // navigate("/allProperty");
         });
         }
     })
   };
+  if (loading) {
+    return <h2>Please Wait...</h2>;
+  }
+
   return (
     <div className="w-11/12 md:w-3/4 mx-auto border p-10 shadow">
       <h3 className="text-center text-violet-500 font-semibold text-2xl mb-5 border-b border-violet-400">Add Your Property For Rent</h3>
@@ -287,8 +302,8 @@ const AddProperty = () => {
                 <option value="Only For Girls">Only For Girls</option>
                 <option value="For Family">For Family</option>
                 <option value="Community Center">Community Center</option>
-                <option value="Shop & Restaurant Space">
-                  Shop & Restaurant Space
+                <option value="Shop and Restaurant Space">
+                  Shop and Restaurant Space
                 </option>
               </select>
               {errors.category && (

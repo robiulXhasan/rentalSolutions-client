@@ -6,6 +6,8 @@ import AddProperty from "../Pages/AddProperty/AddProperty";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import Details from "../Pages/Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,18 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <AddProperty />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoutes>
+            <Details />
           </PrivateRoutes>
         ),
       },

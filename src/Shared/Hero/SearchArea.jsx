@@ -15,7 +15,7 @@ const SearchArea = () => {
 
   }
     return (
-        <div className=" hero-property">
+        <div className="flex justify-center">
         <form onSubmit={handleSearch} className=" grid md:grid-cols-4 gap-2 md:gap-5 justify-between items-center search-property">
           <div className="form-control col-span-4 md:col-span-1 md:border-e md:px-3 ">
             <label className="label">
@@ -71,7 +71,7 @@ const SearchArea = () => {
               <option value="Only For Girls">Only For Girls</option>
               <option value="For Family">For Family</option>
               <option value="Community Center">Community Center</option>
-              <option value="Shop & Restaurant Space">Shop & Restaurant Space</option>
+              <option value="Shop and Restaurant">Shop & Restaurant</option>
             </select>
           </div>
           <div className="pt-9 col-span-4 md:col-span-1  form-control">

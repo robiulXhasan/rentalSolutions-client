@@ -30,16 +30,12 @@
     color: #ffffff;
   }
   
-  .hero-property {
-    display: flex;
-    justify-content: center;
-  }
   
   .search-property {
     width: 70%;
     min-height: 18%;
     position: absolute;
-    margin-top: -14%;
+    top: 42%;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -88,7 +84,7 @@ border: 1px solid black;
 
 }
 ul[role='navigation'] li.selected{
-  background-color: blue;
+  background-color: rgb(131, 74, 224);
   color: white;
 }
 ul[role='navigation'] li.disabled{

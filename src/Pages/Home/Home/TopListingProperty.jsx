@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 const TopListingProperty = () => {
   const [property, setProperty] = useState([]);
   useEffect(() => {
-    fetch("top-listing-property.json")
+    fetch("https://rental-solutions-server.vercel.app/products")
       .then((res) => res.json())
       .then((data) => setProperty(data.slice(0, 10)));
   }, []);

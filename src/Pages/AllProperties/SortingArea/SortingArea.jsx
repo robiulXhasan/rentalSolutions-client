@@ -45,17 +45,15 @@ const SortingArea = ({ handleSideBarSearch }) => {
           </div>
           <h5 className="my-2 text-xl font-medium ">Types of Rent</h5>
           <div>
-          {errors.category?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
+          
 
-            <div className="form-control " >
+            <div className="form-control" >
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
                   value="Apartment Building"
-                  className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  className="checkbox checkbox-sm"
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Apartment Building</span>
               </label>
@@ -64,9 +62,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   type="checkbox"
                   value="Flat Rent"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Flat Rent</span>
               </label>
@@ -75,9 +71,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   type="checkbox"
                   value="Commercial Space"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Commercial Space</span>
               </label>
@@ -86,20 +80,16 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   type="checkbox"
                   value="Office Space"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Office Space</span>
               </label>
               <label className="cursor-pointer flex items-center gap-2">
                 <input
                   type="checkbox"
-                  value="Shop & Restaurant"
+                  value="Shop and Restaurant"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Shop & Restaurant</span>
               </label>
@@ -108,9 +98,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   type="checkbox"
                   value="Community Center"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Community Center</span>
               </label>
@@ -119,22 +107,19 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   type="checkbox"
                   value="Hostel Rent"
                   className="checkbox checkbox-sm "
-                  {...register("category", {
-                    required: true,
-                  })}
+                  {...register("category")}
                 />
                 <span className="label-text text-lg">Hostel Rent</span>
               </label>
             </div>
 
           </div>
-          <h5 className="mt-2">Select Month</h5>
+          <h5 className="my-2 text-xl font-medium">Select Month</h5>
           <div className="form-control  ">
             <select
-              className="select select-primary w-full text-lg font-normal "
+              className="select select-bordered w-full text-lg font-normal "
               aria-label="Default select example"
               name="month"
-              required
               {...register("month")}
             >
               <option value="">Select Month</option>
@@ -152,8 +137,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
               <option value="December">December</option>
             </select>
           </div>
-          <h5 className="mt-2">Bed Room</h5>
-          {errors.bed?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
+          <h5 className="mt-2 text-xl font-medium">Bed Room</h5>
           <div className="grid grid-cols-5 gap-4">
             <div className="form-control">
               <label className="cursor-pointer flex items-center gap-1">
@@ -162,7 +146,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="1"
                   className="checkbox  checkbox-sm"
                   
-                  {...register("bed",{required:true})}
+                  {...register("bed")}
                 />
                 <span className="label-text text-lg">1</span>
               </label>{" "}
@@ -176,7 +160,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="2"
                   className="checkbox checkbox-sm "
                   
-                  {...register("bed",{required:true})}
+                  {...register("bed")}
                 />
                 <span className="label-text text-lg">2</span>
               </label>{" "}
@@ -189,7 +173,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="3"
                   className="checkbox checkbox-sm "
                   
-                  {...register("bed",{required:true})}
+                  {...register("bed")}
                 />
                 <span className="label-text text-lg">3</span>
               </label>{" "}
@@ -202,7 +186,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="4"
                   className="checkbox  checkbox-sm "
                   
-                  {...register("bed",{required:true})}
+                  {...register("bed")}
                 />
                 <span className="label-text text-lg">4</span>
               </label>{" "}
@@ -215,14 +199,13 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="5"
                   className="checkbox  checkbox-sm "
                   
-                  {...register("bed",{required:true})}
+                  {...register("bed")}
                 />
                 <span className="label-text text-lg">5</span>
               </label>{" "}
             </div>
           </div>
-          <h5 className="mt-2">Wash Room</h5>
-          {errors.washRoom?.type === 'required' && <p className="text-red-600 ">Please select an item*</p>}
+          <h5 className="mt-2 text-xl font-medium">Wash Room</h5>
 
           <div className="flex gap-4">
             <div className="form-control">
@@ -232,7 +215,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="1"
                   className="checkbox checkbox-sm "
                   
-                   {...register("washRoom",{required:true})}
+                   {...register("washRoom")}
                 />
                 <span className="label-text text-lg">1</span>
               </label>{" "}
@@ -246,7 +229,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="2"
                   className="checkbox  checkbox-sm "
                   
-                   {...register("washRoom",{required:true})}
+                   {...register("washRoom")}
                 />
                 <span className="label-text text-lg">2</span>
               </label>{" "}
@@ -259,7 +242,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="3"
                   className="checkbox  checkbox-sm "
                   
-                   {...register("washRoom",{required:true})}
+                   {...register("washRoom")}
                 />
                 <span className="label-text text-lg">3</span>
               </label>{" "}
@@ -272,7 +255,7 @@ const SortingArea = ({ handleSideBarSearch }) => {
                   value="4"
                   className="checkbox  checkbox-sm "
                   
-                   {...register("washRoom",{required:true})}
+                   {...register("washRoom")}
                 />
                 <span className="label-text text-lg">4</span>
               </label>{" "}

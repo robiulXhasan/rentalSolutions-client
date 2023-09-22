@@ -38,7 +38,7 @@ const Register = () => {
         profileUpdate(data.name)
               .then((result) => {
                 console.log(savedUser);
-                fetch("http://localhost:5000/user", {
+                fetch("https://rental-solutions-server.vercel.app/user", {
                   method: "POST",
                   headers: { "content-type": "application/json" },
                   body: JSON.stringify(savedUser),

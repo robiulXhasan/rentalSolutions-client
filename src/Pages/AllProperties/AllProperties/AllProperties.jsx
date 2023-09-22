@@ -4,47 +4,52 @@ import SortingArea from "../SortingArea/SortingArea";
 import Posts from "../Posts/Posts";
 import ReactPaginate from "react-paginate";
 import { useLocation } from "react-router-dom";
+import { BsFillGridFill, BsListUl } from "react-icons/bs";
+import axios from "axios";
 
 const AllProperties = () => {
-  const [posts,setPosts]=useState([])
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [grid, setGrid] = useState(true);
   const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage] = useState(9);
 
   const location = useLocation();
   const bannerSearchData = location?.state?.data;
+
   //products sort from side area
-  const handleSideBarSearch =(data)=>{
+  const handleSideBarSearch = async (data) => {
     console.log(data);
-    const priceRange=data?.price;
-    const city=data?.city;
+    const priceRange = data?.price;
+    const city = data?.city;
     const rentType = data?.category;
     const bed = data?.bed;
     const wash = data?.washRoom;
     const month = data?.month;
-    fetch(
-      `http://localhost:5000/products-collection?price=${priceRange}&city=${city}&rentType=${rentType}&bed=${bed}&wash=${wash}&month=${month}`
-    )
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-   
-  }
+    setLoading(true);
+    const res = await axios.get(
+      `https://rental-solutions-server.vercel.app/products-collection?price=${priceRange}&city=${city}&rentType=${rentType}&bed=${bed}&wash=${wash}&month=${month}`
+    );
+    setPosts(res.data);
+    setLoading(false);
+  };
   //products sort from banner area
   useEffect(() => {
     if (bannerSearchData?.city) {
-      setLoading(true);
-      fetch(
-        `http://localhost:5000/sortProducts?city=${bannerSearchData?.city}&area=${bannerSearchData?.area}&category=${bannerSearchData?.category}`
-      )
-        .then((res) => res.json())
-        .then((data) => setPosts(data));
-        setLoading(false);
-    } else {
-      const fetchPosts =  () => {
+      const fetchData = async () => {
         setLoading(true);
-         fetch("http://localhost:5000/products")
-        .then((res) => res.json())
-        .then((data) => setPosts(data));
+        const res = await axios.get(
+          `https://rental-solutions-server.vercel.app/sortProducts?city=${bannerSearchData?.city}&area=${bannerSearchData?.area}&category=${bannerSearchData?.category}`
+        );
+        setPosts(res.data);
+        setLoading(false);
+      };
+      fetchData();
+    } else {
+      const fetchPosts = async () => {
+        setLoading(true);
+        const res = await axios.get("https://rental-solutions-server.vercel.app/products");
+        setPosts(res.data);
         setLoading(false);
       };
 
@@ -62,20 +67,19 @@ const AllProperties = () => {
   //       setLoading(false);
 
   //       return res.json();
-  //     } 
+  //     }
 
   //       const res = await fetch(
   //         "https://rent-us-bd.vercel.app/productCollection")
-      
 
   //       return res.json();
-      
+
   //   },
   //});
 
   // useEffect(() => {
   //   setLoading(true);
-  //   fetch("http://localhost:5000/products")
+  //   fetch("https://rental-solutions-server.vercel.app/products")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setLoading(false);
@@ -108,10 +112,13 @@ const AllProperties = () => {
   return (
     <div>
       <div className="mb-32 md:mb-0 ">
-        <div className="bg-green-950 h-[240px]"></div>
-        <SearchArea />
+        <div className="bg-green-950 md:relative h-[280px]">
+        <div className="md:absolute w-full  md:top-[30%]"><SearchArea /></div>
+        </div>
+       
+        
       </div>
-      <div className="w-11/12 md:w-10/12 mx-auto mt-10">
+      <div className="w-11/12  mx-auto mt-10">
         {/* <h3 className="mt-10 font-bold text-3xl text-violet-500  my-5">
           Search results:-
         </h3> */}
@@ -124,22 +131,36 @@ const AllProperties = () => {
               <h3 className="font-bold text-3xl text-violet-500">
                 Property For Rent
               </h3>
-              <p>
-                <span className="text-violet-500 font-bold">
-                  {posts.length}
-                </span>{" "}
-                results.
-              </p>
+
+              <div className="flex items-center  gap-10">
+                <div className="flex gap-3 text-xl">
+                  <BsFillGridFill
+                    onClick={() => setGrid(true)}
+                    className={`${
+                      grid == true ? "bg-violet-100" : "bg-white"
+                    } p-1 text-2xl`}
+                  />
+                  <BsListUl
+                    onClick={() => setGrid(false)}
+                    className={`${
+                      grid == false ? "bg-violet-100" : "bg-white"
+                    } p-1 text-2xl`}
+                  />
+                </div>
+                <p className="text-violet-500 font-bold">
+                  {posts.length} results.
+                </p>{" "}
+              </div>
             </div>
             <div>
-              <Posts posts={currentItems} loading={loading}></Posts>
+              <Posts posts={currentItems} loading={loading} grid={grid}></Posts>
               <ReactPaginate
                 breakLabel="..."
-                nextLabel="next >"
+                nextLabel="Next >"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
-                previousLabel="< previous"
+                previousLabel="< Previous"
                 renderOnZeroPageCount={null}
               />
             </div>

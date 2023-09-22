@@ -6,12 +6,17 @@ import TopListingProperty from "./TopListingProperty";
 
 const Home = () => {
   const [category, setCategory] = useState([]);
-
+  const  [totalAdd,setTotalAdd]=useState(0);
   useEffect(() => {
     fetch("category.json")
       .then((res) => res.json())
       .then((data) => setCategory(data));
   }, []);
+  useEffect(()=>{
+    fetch('https://rental-solutions-server.vercel.app/products')
+    .then(res=>res.json())
+    .then(data=>setTotalAdd(data))
+  })
 
   return (
     <div>
@@ -20,20 +25,17 @@ const Home = () => {
       <section className="pt-5 md:pt-0 pb-10 bg-violet-100">
         <div className="w-11/12 md:w-10/12 mx-auto">
           <div className="category-title pt-32 md:pt-20 ">
-            <p className="text-4xl font-bold text-center my-10">
+            <p className="text-4xl font-bold text-center">
               Top Categories
             </p>
-            {/* <span>
-              {category.length} categories {add.length} ads
-            </span> */}
+            <p className="text-xl text-center my-2 ">
+              <span className="font-bold text-violet-600">{category.length}</span> categories <span className="font-bold text-violet-600">{totalAdd.length}</span> ads
+            </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-5 ">
             {category.map((categ) => (
               <Category
-                // icon={categ.category_icon}s
                 key={categ.id}
-                // title={categ.title}
-                // adds={categ.adds}
                 categ={categ}
               ></Category>
             ))}
